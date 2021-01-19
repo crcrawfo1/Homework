@@ -3,7 +3,7 @@
 
 ### A Quick Blurb:
 
-In this assignment, I was tasked with building and evaluationg several machine-learning models to predict credit risk using free data from LendingClub. I used ensemble learning and resampling to accomplish this goal.
+In this assignment, I was tasked with building and evaluating several machine-learning models to predict credit risk using free data from LendingClub. I used ensemble learning and resampling to accomplish this goal.
 
 ### How this repository works:
 
