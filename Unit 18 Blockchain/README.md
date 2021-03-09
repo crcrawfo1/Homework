@@ -1,88 +1,31 @@
-# Project Title
+# Unit 18 Blockchain Homework
 
-One Paragraph of project description goes here
+For this assignment, I set up a custom testnet blockchain, I sent a test transaction, and I created a repository. Here I will detail how the custom blockchain works. The assignment requested that we set up a POA blockchain, however I was unable to get the nodes to reliably unlock themselves, so I opted to set up a POW blockchain as I could reliably get that network working.
 
-## Getting Started
+## Getting the Blockchain Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+After you've installed all of the blockchain tools correctly, make sure to clone this repository as is into your blockchain tools folder.  In order to get this blockchain started, one must open a gitbash command in their blockchain-tools folder, which will also be the home folder for all of the files in this repository.  After this, you must initialize the nodes with the zbankprivate.json. In order to accomplish this, type :
 
-### Prerequisites
+./geth init zbankprivate.json --datadir node 1
+./geth init zbankprivate.json --datadir node 2
 
-What things you need to install the software and how to install them
+into your gitbash. If any errors spring back at you, then you'll have to delete the geth folders in each node's folder. This can be done either by typing:
 
-```
-Give examples
-```
+Rm - Rf node1/geth node2/geth
 
-### Installing
+into your gitbash, or by removing the folders within the windows finder. After you've successfully managed to initialize each node, it's time to get the first node mining. In order to start mining, type:
 
-A step by step series of examples that tell you how to get a development env running
+./geth --datadir node1 --mine --minerthreads 1
 
-Say what the step will be
+Into the same gitbash you used to initialize the nodes.  Before continuing, be sure to copy the enode address that the first node shoots out and paste it somewhere safe. Now open up a second gitbash in the blockchain-tools folder, and type in:
 
-```
-Give the example
-```
+./geth --datadir node2 --port 30304 --rpc --bootnodes "<your enode here>" --ipcdisable
+  
+ Be sure to replace the <your enode here> with the enode you copied in the last step.
+  
+ At this point, node 1 will be mining, and node 2 will allow you to interact with mycrypto in order to start transacting.
 
-And repeat
+## Trading within the blockchain testnet
 
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+At this point, node 1 should be accruing ethereum within the test network. In order to transact, we're going to be opening up mycrypto. You will first need to configure the network in order to start running transactions. First create a new custom network named zbank private, set network to custom, set node name to zbankprivate, network name to zbankprivate, currency to ethereum and use port 335 in order to be able to interact with the zbankprivate network, additionally, use http://127.0.0.1:8545 as your URL, as that is your machine's default RPC port. Afterwards, open up the first node's keystore file in view & send. (The keystore file can be found in node1/keystore of this repository) Use the password that can be found in zbankprivate/node1.txt of this repository. At this point you should be able to send ethereum to node2 by using the public address found in zbankprivate/node2.txt of this repository. You can log in to check that the second node has received the ethereum by mimicing the steps above for node 2. Additionally, you can record the transaction's hash id and search for it to check its status.
 
